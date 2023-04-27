@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "escape",
-    "version": "0.0.0"
+    "version": "0.0.3"
   },
   "tauri": {
     "allowlist": {
@@ -30,14 +30,19 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.jorstad.escape",
       "targets": "all"
     },
     "security": {
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://gist.githubusercontent.com/ShaunJorstad/df4b0864630d2e141f9512a79ebbaa9f/raw"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4ODU5NkIxRTVBNTg2REMKUldUY2hxWGxzWmFGU0tsNytKS2laQ2tNZ25oek5wek44aERsekJqbzI0SDJhWTRIM2xiUW1IR0sK"
     },
     "windows": [
       {
