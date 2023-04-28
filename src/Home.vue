@@ -2,7 +2,7 @@
 import VersionLabel from "./VersionLabel.vue";
 </script>
 <template>
-  <div>home</div>
+  <div>home (should have version bump ;)</div>
   <Suspense>
     <VersionLabel />
   </Suspense>
