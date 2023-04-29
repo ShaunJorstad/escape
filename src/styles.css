@@ -7,6 +7,26 @@
   src: url("./assets/fonts/Lato/Lato-Black.ttf");
 }
 
+@font-face {
+  font-family: "lato-bold";
+  src: url("./assets/fonts/Lato/Lato-Bold.ttf");
+}
+
+@font-face {
+  font-family: "lato-light";
+  src: url("./assets/fonts/Lato/Lato-Light.ttf");
+}
+
+@font-face {
+  font-family: "lato-regular";
+  src: url("./assets/fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "lato-thin";
+  src: url("./assets/fonts/Lato/Lato-Thin.ttf");
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;

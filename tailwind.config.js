@@ -8,6 +8,10 @@ export default {
       },
       fontFamily: {
         "lato-black": ["lato-black"],
+        "lato-bold": ["lato-bold"],
+        "lato-regular": ["lato-regular"],
+        "lato-light": ["lato-light"],
+        "lato-thin": ["lato-thin"],
       },
     },
   },
