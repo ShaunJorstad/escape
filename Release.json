@@ -1,0 +1,10 @@
+{
+  "version": "v0.0.4",
+  "notes": "Test version",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU05od0FrYithTzFqcVNUb2pOUU9mRFRVc1g4SkIwNDN2V2kvNG1rbDFneDQzNldHbVgxN3loV21Nazk1Zytib284bzdCbitSRE91V1FyUTNXbDVQRFF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjgyNjk4OTg2CWZpbGU6ZXNjYXBlLmFwcC50YXIuZ3oKT2gvc2RMbE9FbWZnNXhBWHo1VXFFK2hueGtvdlNURWlwdk5OUmxTRThFcktjTkJTRENrWlI3dmVKcVpnNG5hRmVJM3ZaNzRvUm1RSE10UzRXU29CQmc9PQo=",
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.0.1/escape.app.tar.gz"
+    }
+  }
+}

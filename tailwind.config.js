@@ -6,6 +6,9 @@ export default {
       colors: {
         "primary-light-gray": "#FBFBFB",
       },
+      fontFamily: {
+        "lato-black": ["lato-black"],
+      },
     },
   },
   plugins: [],

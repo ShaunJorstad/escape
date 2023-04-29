@@ -3,5 +3,5 @@ import { getVersion } from "@tauri-apps/api/app";
 const tauriVersion = await getVersion();
 </script>
 <template>
-  <div>Version: {{ tauriVersion }}</div>
+  <div class="text-slate-600">v{{ tauriVersion }}</div>
 </template>
