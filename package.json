@@ -10,8 +10,10 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.17",
     "@tauri-apps/api": "^1.2.0",
+    "pinia": "^2.0.35",
     "vue": "^3.2.45",
     "vue-router": "4"
   },
