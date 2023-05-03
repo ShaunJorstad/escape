@@ -1,5 +1,21 @@
 <script setup lang="ts">
-import Placeholder from "../Placeholder.vue";
+import { computed, ref, watch } from "vue";
+import { useSettingsStore } from "../../Stores/SettingsStore";
+
+const store = useSettingsStore();
+const draftTitle = ref("");
+
+const hasChange = computed(() => {
+  return draftTitle.value != store.settings.title;
+});
+
+function submit() {
+  store.setSetting("title", draftTitle.value);
+}
+
+watch(store.settings, (val) => {
+  draftTitle.value = val.title;
+});
 </script>
 <template>
   <div class="bg-white shadow sm:rounded-lg">
@@ -14,6 +30,8 @@ import Placeholder from "../Placeholder.vue";
             id="title"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="Title can be left blank"
+            v-model="store.settings.title"
+            @keypress.enter="submit"
           />
         </div>
         <div
@@ -22,6 +40,7 @@ import Placeholder from "../Placeholder.vue";
           <button
             type="button"
             class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            @click="submit"
           >
             Update title
           </button>

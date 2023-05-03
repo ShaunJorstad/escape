@@ -18,6 +18,7 @@
         "open": true
       },
       "window": {
+        "all": true,
         "startDragging": true
       }
     },

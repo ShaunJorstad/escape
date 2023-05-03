@@ -1,0 +1,50 @@
+<script setup lang="ts">
+import Placeholder from "../Placeholder.vue";
+import { useSettingsStore } from "../../Stores/SettingsStore";
+import PrimaryButton from "./PrimaryButton.vue";
+import { WebviewWindow } from "@tauri-apps/api/window";
+import { computed, onMounted, ref } from "vue";
+import { emit } from "@tauri-apps/api/event";
+import Timer from "../../Timer.vue";
+const settingsStore = useSettingsStore();
+
+function emitChangeNavigation(index: number) {
+  if (index >= 10) {
+    return;
+  }
+  emit("change-navigation");
+  setTimeout(() => {
+    emitChangeNavigation(index + 1);
+  }, 200);
+}
+
+function openGameMonitor() {
+  const mainWindow = WebviewWindow.getByLabel("timer");
+  if (mainWindow) return;
+  const webview = new WebviewWindow("timer", {
+    url: "index.html",
+  });
+  webview.once("tauri://created", function () {
+    // webview window successfully created
+    settingsStore.monitorIsOpen = true;
+
+    emitChangeNavigation(0);
+  });
+}
+</script>
+<template>
+  <div class="h-96 mt-4">
+    <div class="h-96">
+      <Timer />
+    </div>
+    <div
+      class="h-96 -mt-96 flex justify-center items-center opacity-0 hover:opacity-100"
+    >
+      <PrimaryButton
+        @click="openGameMonitor"
+        :text="'Open Game Monitor'"
+        v-if="!settingsStore.monitorIsOpen"
+      />
+    </div>
+  </div>
+</template>

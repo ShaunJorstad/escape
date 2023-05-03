@@ -6,6 +6,28 @@ import Timer from "./components/Controls/Timer.vue";
 import BreadCrumbs from "./components/BreadCrumbs.vue";
 import Hints from "./components/Controls/Hints.vue";
 import Messages from "./components/Controls/Messages.vue";
+import GameMonitor from "./components/Controls/GameMonitor.vue";
+import { onMounted, onUnmounted, watchEffect } from "vue";
+import { useSettingsStore } from "./Stores/SettingsStore";
+import { emit, listen } from "@tauri-apps/api/event";
+
+const settingsStore = useSettingsStore();
+
+const unlisten = listen("request-broadcast", () => {
+  emit("broadcast", settingsStore.dataForBroadcast);
+});
+
+watchEffect(() => {
+  emit("broadcast", settingsStore.dataForBroadcast);
+});
+
+onMounted(() => {
+  settingsStore.monitorView = "timer";
+});
+
+onUnmounted(async () => {
+  (await unlisten)();
+});
 </script>
 <template>
   <Route>
@@ -13,9 +35,7 @@ import Messages from "./components/Controls/Messages.vue";
       <div class="">
         <Title />
         <Timer />
-        <div class="h-96">
-          <Placeholder :text="`Game Monitor Preview.`" />
-        </div>
+        <GameMonitor />
       </div>
       <div class="">
         <Hints />
