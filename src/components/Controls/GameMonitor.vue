@@ -33,12 +33,17 @@ function openGameMonitor() {
 }
 </script>
 <template>
-  <div class="h-96 mt-4 drop-shadow-md bg-primary-light-gray rounded-xl">
-    <div class="h-96">
-      <Timer />
+  <div
+    class="h-96 mt-4 drop-shadow-md bg-primary-light-gray rounded-xl relative"
+  >
+    <div class="absolute w-full h-full">
+      <!-- Timer -->
+      <Timer
+        class="scale-50 h-[200%] absolute -top-[50%] w-[200%] -left-[50%]"
+      />
     </div>
     <div
-      class="h-96 -mt-96 flex justify-center items-center opacity-0 hover:opacity-100"
+      class="absolute w-full h-full flex justify-center items-center opacity-0 hover:opacity-100"
     >
       <PrimaryButton
         @click="openGameMonitor"

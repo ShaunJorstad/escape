@@ -25,9 +25,9 @@ onUnmounted(async () => {
 </script>
 
 <template>
-  <main class="bg-primary-light-gray h-screen w-screen flex flex-col">
-    <div data-tauri-drag-region class="w-full h-8"></div>
-    <div class="flex-grow">
+  <main class="bg-primary-light-gray h-screen w-screen">
+    <div data-tauri-drag-region class="w-full h-8 min-h-8"></div>
+    <div class="">
       <router-view></router-view>
     </div>
   </main>
