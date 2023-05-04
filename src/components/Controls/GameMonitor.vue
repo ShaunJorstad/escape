@@ -33,7 +33,7 @@ function openGameMonitor() {
 }
 </script>
 <template>
-  <div class="h-96 mt-4">
+  <div class="h-96 mt-4 drop-shadow-md bg-primary-light-gray rounded-xl">
     <div class="h-96">
       <Timer />
     </div>

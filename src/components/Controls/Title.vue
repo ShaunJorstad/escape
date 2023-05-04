@@ -10,7 +10,8 @@ const hasChange = computed(() => {
 });
 
 function submit() {
-  store.setSetting("title", draftTitle.value);
+  // store.setSetting("title", draftTitle.value);
+  store.settings.title = draftTitle.value;
 }
 
 watch(store.settings, (val) => {
@@ -24,16 +25,14 @@ watch(store.settings, (val) => {
         Title
       </h3>
       <div class="mt-2 sm:flex sm:items-start sm:justify-between">
-        <div class="max-w-xl text-sm text-gray-500">
-          <input
-            name="title"
-            id="title"
-            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            placeholder="Title can be left blank"
-            v-model="store.settings.title"
-            @keypress.enter="submit"
-          />
-        </div>
+        <input
+          name="title"
+          id="title"
+          class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Title can be left blank"
+          v-model="draftTitle"
+          @keypress.enter="submit"
+        />
         <div
           class="mt-5 sm:ml-6 sm:mt-0 sm:flex sm:flex-shrink-0 sm:items-center"
         >
