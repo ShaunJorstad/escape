@@ -5,14 +5,17 @@ import {
   nextTick,
   onMounted,
   onUnmounted,
+  ref,
   watch,
   watchEffect,
 } from "vue";
 import { useSettingsStore } from "../Stores/SettingsStore";
-import { listen } from "@tauri-apps/api/event";
+import { emit, listen } from "@tauri-apps/api/event";
 import { useInterval } from "@vueuse/core";
 const settingsStore = useSettingsStore();
 const isDev = import.meta.env.DEV;
+const emittedBelow60 = ref(false);
+const requestingTime = ref(false);
 
 const tickMS = isDev ? 100 : 1000;
 let { counter, reset, pause, resume } = useInterval(tickMS, { controls: true });
@@ -96,10 +99,21 @@ const unlisten = listen("clock", async (event) => {
   }
 });
 
-// TODO: Watch just totalSeconds for a change. Then redraw both circles.
+watch(remainingSeconds, () => {
+  if (!emittedBelow60.value && remainingSeconds.value < 60) {
+    emit("timeNotice", { remaining: remainingSeconds.value });
+    emittedBelow60.value = true;
+  } else if (remainingSeconds.value <= 0) {
+    emit("timeNotice", { remaining: 0 });
+  }
+});
+
 watch(totalSeconds, () => {
+  // When the game time changes
   renderArc("#059669", 2, 6);
   renderArc("#ffffff", radians.value, 8);
+  emittedBelow60.value = false;
+  emit("timeNotice", { remaining: remainingSeconds.value });
 });
 
 watchEffect(() => {
@@ -111,11 +125,34 @@ watchEffect(() => {
   }
 });
 
+const unlistenTimeRequest = listen("timeRequest", (event) => {
+  console.log("clock responding to timer request");
+  if (requestingTime.value) {
+    if (event.payload) {
+      console.log("Consuming current timer");
+      counter.value = event.payload.past;
+      requestingTime.value = false;
+    }
+    return;
+  }
+  if (!event.payload) {
+    console.log("Emitting current timer");
+    emit("timeRequest", { past: counter.value });
+  }
+});
+
 onMounted(() => {
+  requestingTime.value = true;
+  emit("timeRequest");
+  setTimeout(() => {
+    // If only one clock is active, this component won't receive a response.
+    requestingTime.value = false;
+  }, 1000);
   renderArc("#059669", 2, 6);
 });
 onUnmounted(async () => {
   (await unlisten)();
+  (await unlistenTimeRequest)();
 });
 </script>
 <template>
