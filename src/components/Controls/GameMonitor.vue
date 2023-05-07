@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import Placeholder from "../Placeholder.vue";
 import { useSettingsStore } from "../../Stores/SettingsStore";
 import PrimaryButton from "./PrimaryButton.vue";
 import { WebviewWindow } from "@tauri-apps/api/window";
-import { computed, onMounted, ref } from "vue";
 import { emit } from "@tauri-apps/api/event";
 import Timer from "../../Timer.vue";
 const settingsStore = useSettingsStore();
@@ -38,9 +36,7 @@ function openGameMonitor() {
   >
     <div class="absolute w-full h-full">
       <!-- Timer -->
-      <Timer
-        class="scale-50 h-[200%] absolute -top-[50%] w-[200%] -left-[50%]"
-      />
+      <Timer class="scale-50 absolute fix" />
     </div>
     <div
       class="absolute w-full h-full flex justify-center items-center opacity-0 hover:opacity-100"
@@ -53,3 +49,13 @@ function openGameMonitor() {
     </div>
   </div>
 </template>
+
+<style>
+.fix {
+  /* These styles started getting overriden without any code changes when they were tailwind. 😭 */
+  height: 200% !important;
+  width: 200% !important;
+  left: -50%;
+  top: -50%;
+}
+</style>
