@@ -18,6 +18,7 @@ const emittedBelow60 = ref(false);
 const requestingTime = ref(false);
 
 const tickMS = isDev ? 100 : 1000;
+const active = ref(false);
 let { counter, reset, pause, resume } = useInterval(tickMS, { controls: true });
 // imediately pause the interval
 pause();
@@ -84,6 +85,7 @@ const unlisten = listen("clock", async (event) => {
     reset();
     renderArc("#059669", 2, 6);
     resume();
+    active.value = true;
   }
   if (status === "timeChange") {
     renderArc("#059669", 2, 6);
@@ -92,10 +94,12 @@ const unlisten = listen("clock", async (event) => {
   }
   if (status === "play") {
     resume();
+    active.value = true;
   }
   if (status === "pause") {
     console.log("Clock is pausing");
     pause();
+    active.value = false;
   }
 });
 
@@ -122,6 +126,7 @@ watchEffect(() => {
   }
   if (remainingSeconds.value <= 0) {
     pause();
+    active.value = false;
   }
 });
 
@@ -131,13 +136,20 @@ const unlistenTimeRequest = listen("timeRequest", (event) => {
     if (event.payload) {
       console.log("Consuming current timer");
       counter.value = event.payload.past;
+      console.log(event);
+      if (event.payload.active) {
+        active.value = true;
+        setTimeout(() => {
+          resume();
+        }, 200);
+      }
       requestingTime.value = false;
     }
     return;
   }
   if (!event.payload) {
     console.log("Emitting current timer");
-    emit("timeRequest", { past: counter.value });
+    emit("timeRequest", { past: counter.value, active: active.value });
   }
 });
 
