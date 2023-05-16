@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watchEffect } from "vue";
 import { useSettingsStore } from "../../Stores/SettingsStore";
 
 const store = useSettingsStore();
@@ -14,8 +14,11 @@ function submit() {
   store.settings.title = draftTitle.value;
 }
 
-watch(store.settings, (val) => {
-  draftTitle.value = val.title;
+watchEffect(() => {
+  draftTitle.value = store.settings.title;
+});
+onMounted(() => {
+  // draftTitle.value = store.settings.title;
 });
 </script>
 <template>

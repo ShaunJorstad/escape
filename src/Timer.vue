@@ -34,7 +34,7 @@ onUnmounted(async () => {
       {{ settingsStore.settings.title }}
     </h1>
     <div class="flex">
-      <div class="grow">
+      <div class="grow pl-40 pt-20">
         <Clock />
       </div>
       <div class="grow"></div>

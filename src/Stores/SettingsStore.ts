@@ -1,11 +1,45 @@
 import { emit } from "@tauri-apps/api/event";
 import { defineStore } from "pinia";
 import { computed, reactive, ref, watch, watchEffect } from "vue";
+import router from "../Router";
+import { appDataDir } from "@tauri-apps/api/path";
+import { path, fs } from "@tauri-apps/api";
 
-const defaultSettings = {
+async function getConfigPath() {
+  const appDataDirPath = await appDataDir();
+  return path.join(appDataDirPath, "config.json");
+}
+
+async function readSettings() {
+  const configPath = await getConfigPath();
+  const exists = await fs.exists(configPath);
+  if (exists) {
+    const data = await fs.readTextFile(configPath);
+    return JSON.parse(data);
+  }
+}
+
+async function writeSettings(data: object) {
+  let path = router.currentRoute.value.path;
+  if (path != "/primary") {
+    return;
+  }
+  const base = await appDataDir();
+  const configPath = await getConfigPath();
+  let appDirExists = await fs.exists(base);
+  if (!appDirExists) {
+    console.log("Creating appdata directory");
+    await fs.createDir(base);
+  }
+  fs.writeTextFile(configPath, JSON.stringify(data));
+  console.log(configPath);
+}
+
+let defaultSettings = {
   title: "",
   startHours: 0,
   startMinutes: 0,
+  enableHints: false,
 };
 
 // Non-idiomatic, but we only need one store instance
@@ -71,8 +105,18 @@ const createStore = defineStore("store", () => {
     let data = {
       settings: JSON.parse(JSON.stringify(settings)),
     };
+    writeSettings(data);
     return data;
   });
+
+  /**
+   * Read settings saved locally if they exist
+   */
+  async function init() {
+    const data = await readSettings();
+    console.log(data, "Initializing data");
+    consumeBroadcast(data);
+  }
 
   return {
     settings,
@@ -84,6 +128,7 @@ const createStore = defineStore("store", () => {
     setSetting,
     dataForBroadcast,
     consumeBroadcast,
+    init,
   };
 });
 
@@ -91,6 +136,7 @@ let instance: any;
 function useSettingsStore() {
   if (!instance) {
     instance = createStore();
+    instance.init();
   }
   return instance;
 }

@@ -56,7 +56,7 @@ function closeGameMonitor() {
     <div class="absolute w-full h-full">
       <!-- Timer -->
       <Timer
-        class="scale-50 absolute"
+        class="absolute"
         :class="{
           small: !expand,
           large: expand,
@@ -94,17 +94,18 @@ function closeGameMonitor() {
 <style>
 .small {
   /* These styles started getting overriden without any code changes when they were tailwind. 😭 */
+  transform: scale(0.5);
   height: 200% !important;
   width: 200% !important;
   left: -50%;
   top: -50%;
 }
 .large {
-  transform: scale(4);
-  height: 175% !important;
-  width: 175% !important;
-  top: -38%;
-  left: -38%;
+  transform: scale(0.75) !important;
+  height: 125% !important;
+  width: 125% !important;
+  top: -12.5%;
+  left: -12.5%;
 }
 .expand {
   position: absolute !important;

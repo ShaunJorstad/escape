@@ -17,6 +17,13 @@
         "all": false,
         "open": true
       },
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA", "$APPDATA/*"]
+      },
       "window": {
         "all": true,
         "startDragging": true

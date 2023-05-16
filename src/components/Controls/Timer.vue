@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref } from "vue";
+import { computed, onUnmounted, ref, watchEffect } from "vue";
 import NumberInput from "./NumberInput.vue";
 import Router from "../../Router";
 import { useSettingsStore } from "../../Stores/SettingsStore";
@@ -55,6 +55,7 @@ const unlisten = listen("timeNotice", (event) => {
 onUnmounted(async () => {
   (await unlisten)();
 });
+watchEffect(() => {});
 </script>
 <template>
   <div class="bg-white shadow sm:rounded-lg h-80 mt-4">
@@ -138,17 +139,23 @@ onUnmounted(async () => {
           <span>Minutes:</span>
           <NumberInput
             :max="5"
+            :selected="settingsStore.settings.startHours"
             @change="
               (h) => {
-                settingsStore.settings.startHours = Number(h);
+                if (h !== settingsStore.settings.startHours) {
+                  settingsStore.settings.startHours = Number(h);
+                }
               }
             "
           />
           <NumberInput
             :max="60"
+            :selected="settingsStore.settings.startMinutes"
             @change="
               (m) => {
-                settingsStore.settings.startMinutes = Number(m);
+                if (settingsStore.settings.startMinutes != m) {
+                  settingsStore.settings.startMinutes = Number(m);
+                }
               }
             "
           />
