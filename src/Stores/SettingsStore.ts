@@ -40,6 +40,7 @@ let defaultSettings = {
   startHours: 0,
   startMinutes: 0,
   enableHints: false,
+  hints: [],
 };
 
 // Non-idiomatic, but we only need one store instance
@@ -118,7 +119,29 @@ const createStore = defineStore("store", () => {
     consumeBroadcast(data);
   }
 
+  function incrementHints(inc: boolean) {
+    if (inc) {
+      // @ts-ignore
+      settings.hints?.push(true);
+    } else {
+      if (settings.hints?.length === 0) {
+        return;
+      }
+      settings.hints?.pop();
+    }
+  }
+
+  function toggleHint(index: number) {
+    if (index > settings.hints.length) {
+      return;
+    }
+    // @ts-ignore
+    settings.hints[index] = !settings.hints[index];
+  }
+
   return {
+    toggleHint,
+    incrementHints,
     settings,
     monitorView,
     monitorIsOpen,

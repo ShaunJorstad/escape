@@ -69,7 +69,7 @@ function closeGameMonitor() {
       <PrimaryButton
         @click="openGameMonitor"
         :text="'Open Game Monitor'"
-        v-if="!settingsStore.monitorIsOpen"
+        v-if="settingsStore.monitorIsOpen"
       />
       <div
         v-else
