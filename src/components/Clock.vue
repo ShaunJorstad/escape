@@ -101,6 +101,13 @@ const unlisten = listen("clock", async (event) => {
     pause();
     active.value = false;
   }
+  if (status === "reset") {
+    console.log("Clock is resetting");
+    pause();
+    reset();
+    active.value = false;
+    renderArc("#059669", 2, 6);
+  }
 });
 
 watch(remainingSeconds, () => {

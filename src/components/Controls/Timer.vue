@@ -19,8 +19,6 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 
-const hours = ref(0);
-const minutes = ref(0);
 const hasStarted = ref(false);
 const settingsStore = useSettingsStore();
 const canDecrement = ref(true);
@@ -38,6 +36,16 @@ function startTimer() {
   hasStarted.value = true;
   emit("clock", {
     status: "start",
+  });
+}
+
+function reset() {
+  settingsStore.settings.messages = [];
+  settingsStore.timerIsActive = false;
+  hasStarted.value = false;
+  finished.value = false;
+  emit("clock", {
+    status: "reset",
   });
 }
 
@@ -204,7 +212,7 @@ watchEffect(() => {});
                 class="mt-1 flex items-baseline justify-between md:block lg:flex"
               >
                 <div
-                  class="flex items-baseline text-2xl font-semibold text-indigo-600"
+                  class="flex justify-between text-2xl font-semibold text-indigo-600"
                 >
                   <span class="isolate inline-flex rounded-md shadow-sm">
                     <button
@@ -235,6 +243,15 @@ watchEffect(() => {});
                       <PlusIcon class="h-5 w-5" aria-hidden="true" />
                     </button>
                   </span>
+
+                  <button
+                    type="button"
+                    class="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    @click="reset"
+                    v-if="!(settingsStore.timerIsActive && !finished)"
+                  >
+                    Reset
+                  </button>
                 </div>
               </dd>
             </div>
