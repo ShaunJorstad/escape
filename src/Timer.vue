@@ -49,7 +49,22 @@ onUnmounted(async () => {
           </div>
         </div>
       </div>
-      <div class="grow"></div>
+      <div class="grow flex flex-col justify-around">
+        <div class="">
+          <div
+            class="mx-10 p-8 px-10 text-3xl rounded-xl drop-shadow-lg"
+            :class="{
+              'text-slate-500':
+                index != settingsStore.visibleMessages?.length - 1,
+              'text-slate-700 bg-white':
+                index == settingsStore.visibleMessages?.length - 1,
+            }"
+            v-for="(message, index) in settingsStore.visibleMessages"
+          >
+            {{ message.text }}
+          </div>
+        </div>
+      </div>
     </div>
     <div><!-- spacer --></div>
   </div>

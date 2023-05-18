@@ -41,6 +41,7 @@ let defaultSettings = {
   startMinutes: 0,
   enableHints: false,
   hints: [],
+  messages: [],
 };
 
 // Non-idiomatic, but we only need one store instance
@@ -51,6 +52,11 @@ const createStore = defineStore("store", () => {
   const timerIsActive = ref(false);
   const monitorView = ref("");
   const monitorIsOpen = ref(false);
+
+  const visibleMessages = computed(() => {
+    // @ts-ignore
+    return settings.messages?.filter((message) => message.visible);
+  });
 
   // Getters
 
@@ -139,7 +145,25 @@ const createStore = defineStore("store", () => {
     settings.hints[index] = !settings.hints[index];
   }
 
+  function message(text: string) {
+    // @ts-ignore
+    settings.messages.push({
+      text,
+      visible: true,
+    });
+    var audio = new Audio("/message-tone.wav");
+    audio.play();
+  }
+
+  function toggleMessage(index: number) {
+    // @ts-ignore
+    settings.messages[index].visible = !settings.messages[index].visible;
+  }
+
   return {
+    visibleMessages,
+    message,
+    toggleMessage,
     toggleHint,
     incrementHints,
     settings,
