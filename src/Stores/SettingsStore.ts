@@ -21,7 +21,7 @@ async function readSettings() {
 
 async function writeSettings(data: object) {
   let path = router.currentRoute.value.path;
-  if (path != "/primary") {
+  if (path != "/primary" && path != "/password") {
     return;
   }
   const base = await appDataDir();
@@ -44,6 +44,9 @@ let defaultSettings = {
   messages: [],
   savedMessages: [],
   openSavedMessages: false,
+  password: "",
+  guesses: [],
+  lockedWallpaper: "",
 };
 
 // Non-idiomatic, but we only need one store instance
@@ -172,7 +175,16 @@ const createStore = defineStore("store", () => {
     settings.savedMessages.splice(index, 1);
   }
 
+  function guess(text: string): boolean {
+    // @ts-ignore
+    settings.guesses.push(text);
+    // @ts-ignore
+    let result = text === settings.password;
+    return result;
+  }
+
   return {
+    guess,
     deleteMessage,
     newSavedMessage,
     visibleMessages,

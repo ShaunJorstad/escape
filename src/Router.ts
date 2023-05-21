@@ -3,6 +3,7 @@ import Home from "./Home.vue";
 import Password from "./Password.vue";
 import Primary from "./Primary.vue";
 import Timer from "./Timer.vue";
+import Guessing from "./Guessing.vue";
 import { createWebHashHistory, createRouter } from "vue-router";
 
 const routes = [
@@ -21,6 +22,10 @@ const routes = [
   {
     path: "/timer",
     component: Timer,
+  },
+  {
+    path: "/guess",
+    component: Guessing,
   },
 ];
 

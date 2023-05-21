@@ -15,7 +15,8 @@ const unlistenClose = listen("tauri://close-requested", (event) => {
 
 const unlistenNavigationChange = listen("change-navigation", (event) => {
   if (Router.currentRoute.value.path === "/") {
-    Router.push("/timer");
+    // @ts-ignore
+    Router.push(event?.payload?.guess ? "/guess" : "/timer");
   }
 });
 
