@@ -42,6 +42,8 @@ let defaultSettings = {
   enableHints: false,
   hints: [],
   messages: [],
+  savedMessages: [],
+  openSavedMessages: false,
 };
 
 // Non-idiomatic, but we only need one store instance
@@ -160,7 +162,19 @@ const createStore = defineStore("store", () => {
     settings.messages[index].visible = !settings.messages[index].visible;
   }
 
+  function newSavedMessage() {
+    // @ts-ignore
+    settings.savedMessages.push("New Saved Message");
+  }
+
+  function deleteMessage(index: number) {
+    // @ts-ignore
+    settings.savedMessages.splice(index, 1);
+  }
+
   return {
+    deleteMessage,
+    newSavedMessage,
     visibleMessages,
     message,
     toggleMessage,

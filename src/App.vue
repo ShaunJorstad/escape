@@ -28,10 +28,6 @@ onUnmounted(async () => {
   (await unlistenNavigationChange)();
   (await unlistenUpdates)();
 });
-onMounted(async () => {
-  let result = await checkUpdate();
-  console.log(result);
-});
 </script>
 
 <template>
