@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "notes": "Semi stable beta. Includes timer, messages, hints, password guessing.",
   "pub_date": "2023-05-25T13:52:21.347Z",
   "platforms": {
@@ -13,7 +13,7 @@
     },
     "darwin-aarch64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0ZLc1BKMFhpdVdrRDIzRTBTMEtPQWk1UzdoTGFrWjN4eTFuc0hmYWlHZ3hiK3lhV2F4NmpFTHZMRFJXU3pKMVc0dlNwYkJJT0NBTGp1L0JsN1diSWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNTM2CWZpbGU6ZXNjYXBlXzAuMS4wX2FtZDY0LkFwcEltYWdlLnRhci5negpZWjFFTUZYY3J2LzAzWXcvRU43MEQrK1djZytYa3ZHUlBGOG1DUndzUGZGRGN5MXJzbTlsMlAwTVVBcW5KbmRsb2lhL3hyajQ0K3hNT1JkYjczTFpDZz09Cg==",
-      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_0.1.0_amd64.AppImage.tar.gz"
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_x64.app.tar.gz"
     },
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0Y4NzZ2ZnF0WkZiSGo3WFZOZ3ZyRjVQTEVBZ0dJUEJleitaVXZCRjQwcXBxekxNcW9TanIxdGZTenhPdzVjQkY1cEJsNjU1NU1ZLzJ5ZDdZNVNselFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNzM2CWZpbGU6ZXNjYXBlXzAuMS4wX3g2NF9lbi1VUy5tc2kuemlwCkFGOUtyTzNYWU0yWVFkWFkrUnFxalU1bmJ3Mm90RlJWY1J0aHpFcTlHQ2tYNkw1YTZpMWZneDNPTHdST21ZdW1ETzU2Y2hrZmFpMC9PMjN3YmZFcEJ3PT0K",
