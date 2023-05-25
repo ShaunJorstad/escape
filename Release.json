@@ -1,23 +1,23 @@
 {
-  "version": "0.0.5",
-  "notes": "See the assets to download this version and install.",
-  "pub_date": "2023-05-18T01:02:12.020Z",
+  "version": "0.1.0",
+  "notes": "Semi stable beta. Includes timer, messages, hints, password guessing.",
+  "pub_date": "2023-05-25T13:52:21.347Z",
   "platforms": {
+    "linux-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0ZLc1BKMFhpdVdrRDIzRTBTMEtPQWk1UzdoTGFrWjN4eTFuc0hmYWlHZ3hiK3lhV2F4NmpFTHZMRFJXU3pKMVc0dlNwYkJJT0NBTGp1L0JsN1diSWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNTM2CWZpbGU6ZXNjYXBlXzAuMS4wX2FtZDY0LkFwcEltYWdlLnRhci5negpZWjFFTUZYY3J2LzAzWXcvRU43MEQrK1djZytYa3ZHUlBGOG1DUndzUGZGRGN5MXJzbTlsMlAwTVVBcW5KbmRsb2lhL3hyajQ0K3hNT1JkYjczTFpDZz09Cg==",
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_0.1.0_amd64.AppImage.tar.gz"
+    },
     "darwin-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0lFK1dpRkhKVkh2VnJDWmkvdU5xZVlVOUFPbGFwM0lDQWFYMDkvcFBUOWpHY3JzYVlkYUtVeWIySHVtcGpvb3Z1YVBKMTloV2t6bElwMHRIUEZWT3dZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg0MzcxNjcxCWZpbGU6ZXNjYXBlLmFwcC50YXIuZ3oKdDc5YXNlZGhXVUNmTkkxd1NKM3dDN3pqN1FoZzBtOXFPVlhDL0c2aXM5UWFOMDk1WTZLNk5jMFZqS0FiUUREVzRsU0ovSUpsUnA3U0xvZlFjNkpTQWc9PQo=",
-      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.0.5/escape_x64.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0loLzZyZk9ZaXIzTWpiZUxNbE04NmYrc1c3cWl0ODhZOTJMWnNPRVYrY1A2bmQwQ0p1akJTSEpheElONnpMRjMycXVNK3owU1RXQS9hdysvVEoremd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNTYxCWZpbGU6ZXNjYXBlLmFwcC50YXIuZ3oKckRsWGNKaHhERnJ4VWlVVnJoMUpSdmNHV2JBUkRXb1ZHc1ZpTE4wNkhVeEpCN2VEZm84ZmdLV1lsNXFjVlQ5d05iUUdEdFpGaWtEM0RnbVViSysxRHc9PQo=",
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_x64.app.tar.gz"
     },
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0RZQmVPSnhBNm9kMkVPSWtIbTNETUZVd3BvN09IakpYbWxiWmYwenc3MzhZbkorTGVtQXArZmh1Z2wybGVVbll3NlFXajZFcmcwcVBWUGhMOVR3Y2dRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg0NDQyMTY5CWZpbGU6ZXNjYXBlXzAuMC41X2FtZDY0LkFwcEltYWdlLnRhci5negpMTS9pSjNmM2dsOG1Pei9KRzY2M0pGZHM2R2hTeFloVm5RYzc2T2g4bFc5b0VkNnI1SzJ5bkNTclZreEtjbUhnN2NsbGFIY1RrZ293L0duU1U4aEFDUT09Cg==",
-      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.0.5/escape_0.0.5_amd64.AppImage.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0ZLc1BKMFhpdVdrRDIzRTBTMEtPQWk1UzdoTGFrWjN4eTFuc0hmYWlHZ3hiK3lhV2F4NmpFTHZMRFJXU3pKMVc0dlNwYkJJT0NBTGp1L0JsN1diSWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNTM2CWZpbGU6ZXNjYXBlXzAuMS4wX2FtZDY0LkFwcEltYWdlLnRhci5negpZWjFFTUZYY3J2LzAzWXcvRU43MEQrK1djZytYa3ZHUlBGOG1DUndzUGZGRGN5MXJzbTlsMlAwTVVBcW5KbmRsb2lhL3hyajQ0K3hNT1JkYjczTFpDZz09Cg==",
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_0.1.0_amd64.AppImage.tar.gz"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0o2MGN5U3FTUXN5RFI1OE5BVy80V3F1M1FGeU9GeE1iak90RXdwM2hCV1BqcXpTZnBTVVcxY3RNRFg2b0FzandOOTU3bm05YUd6b0F1OUtYOHlURHdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg0MzcxNjg4CWZpbGU6ZXNjYXBlXzAuMC41X3g2NF9lbi1VUy5tc2kuemlwCkh5YUI5WS82WDRwdEkwdjRyR0ZNNkI1ZFpOLzc2RU9KbUFjZXZHK3l1alFqMEhuWVpMK0pxelF4MFFuS3VsN2gzWkFLL09weTZGRmY3RER3cEo2ekJRPT0K",
-      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.0.5/escape_0.0.5_x64_en-US.msi.zip"
-    },
-    "linux-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0dlVGVaR3lKRjJrRURwWXFTM0Y3Um1oR3VyUjl0MlBoUFd5NmsxQW1UVTViM1RXd3FxV0plcHFjM2lpalNVeGhmT3NuLysvZjV0TlYwcG1kb3dLR2djPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg0MzcxNzIyCWZpbGU6ZXNjYXBlXzAuMC41X2FtZDY0LkFwcEltYWdlLnRhci5negpJRmFpcDQvbm80bVBiNWtkYUxHcVRDRlpIZFhGRUtvRlhETmJkNHQ3YkhOclZKZlp0UGpkQUpPamI0V216a1pGaVJlOTgzOUxNU09WZkRWSzJuZ01DZz09Cg==",
-      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.0.5/escape_0.0.5_amd64.AppImage.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUY2hxWGxzWmFGU0Y4NzZ2ZnF0WkZiSGo3WFZOZ3ZyRjVQTEVBZ0dJUEJleitaVXZCRjQwcXBxekxNcW9TanIxdGZTenhPdzVjQkY1cEJsNjU1NU1ZLzJ5ZDdZNVNselFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjg1MDIyNzM2CWZpbGU6ZXNjYXBlXzAuMS4wX3g2NF9lbi1VUy5tc2kuemlwCkFGOUtyTzNYWU0yWVFkWFkrUnFxalU1bmJ3Mm90RlJWY1J0aHpFcTlHQ2tYNkw1YTZpMWZneDNPTHdST21ZdW1ETzU2Y2hrZmFpMC9PMjN3YmZFcEJ3PT0K",
+      "url": "https://github.com/ShaunJorstad/escape/releases/download/v0.1.0/escape_0.1.0_x64_en-US.msi.zip"
     }
   }
 }
