@@ -6,6 +6,8 @@ import placeholder from "./components/Placeholder.vue";
 import Wallpaper from "./components/Controls/Wallpaper.vue";
 import { WebviewWindow } from "@tauri-apps/api/window";
 import PrimaryButton from "./components/Controls/PrimaryButton.vue";
+import { watch } from "fs";
+import PasswordGuess from "./components/PasswordGuess.vue";
 
 const passwordInput = ref("");
 const store = useSettingsStore();
@@ -74,9 +76,13 @@ onUnmounted(async () => {
       </div>
       <div class="bg-white drop-shadow-md rounded-md p-4">
         <h1>Guess history:</h1>
-        <p v-for="guess in store.settings.guesses">
-          {{ guess }}
-        </p>
+        <div class="max-h-[27rem] overflow-y-scroll">
+          <PasswordGuess
+            v-for="(guess, index) in store.settings.guesses"
+            :guess="guess"
+            :index="index"
+          />
+        </div>
         <PrimaryButton
           text="Clear history"
           @click="

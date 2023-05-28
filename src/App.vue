@@ -27,7 +27,9 @@ const unlistenUpdates = listen("tauri://update-status", (event) => {
 });
 
 const unlistenCloseWindow = listen("tauri://close-requested", (event) => {
-  closeAllWindows();
+  if (event.windowLabel === "main") {
+    closeAllWindows();
+  }
 });
 
 onUnmounted(async () => {

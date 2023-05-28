@@ -25,7 +25,7 @@ const store = useSettingsStore();
           Delete All Messages
         </button>
       </div>
-      <div class="min-h-[27rem] py-4">
+      <div class="min-h-[27rem] max-h-[27rem] overflow-scroll py-4">
         <div
           class="flex justify-between text-lg font-lato-regular text-slate-400 mb-2"
         >
