@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import Placeholder from "./components/Placeholder.vue";
 import Route from "./components/Route.vue";
 import Title from "./components/Controls/Title.vue";
 import Timer from "./components/Controls/Timer.vue";
-import BreadCrumbs from "./components/BreadCrumbs.vue";
 import Hints from "./components/Controls/Hints.vue";
 import Messages from "./components/Controls/Messages.vue";
 import GameMonitor from "./components/Controls/GameMonitor.vue";

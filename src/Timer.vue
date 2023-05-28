@@ -5,6 +5,7 @@ import { onMounted, onUnmounted } from "vue";
 import router from "./Router";
 import Clock from "./components/Clock.vue";
 import { LockClosedIcon, LockOpenIcon } from "@heroicons/vue/24/solid";
+import FullscreenButton from "./components/FullscreenButton.vue";
 
 const settingsStore = useSettingsStore();
 const isPrimary = router.currentRoute.value.path === "/primary";
@@ -31,6 +32,7 @@ onUnmounted(async () => {
 </script>
 <template>
   <div class="h-full w-full overflow-hidden">
+    <FullscreenButton v-if="!isPrimary" />
     <h1 class="font-lato-bold text-stone-600 text-2xl text-center mt-8">
       {{ settingsStore.settings.title }}
     </h1>

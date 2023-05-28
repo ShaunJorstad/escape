@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { useSettingsStore } from "./Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
+import FullscreenButton from "./components/FullscreenButton.vue";
 
 const store = useSettingsStore();
 const passwordInput = ref(null);
@@ -38,7 +39,8 @@ onUnmounted(async () => {
 });
 </script>
 <template>
-  <div class="bg-blue-300 h-screen -mt-8">
+  <div class="h-screen -mt-8">
+    <FullscreenButton />
     <img
       class="absolute w-screen h-screen z-10 select-none"
       :src="
