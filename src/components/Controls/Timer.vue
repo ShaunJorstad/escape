@@ -19,11 +19,26 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 
+const incOptions = [
+  {
+    15: "15s",
+    30: "30s",
+    45: "45s",
+    60: "1m",
+  },
+  {
+    300: "5m",
+    600: "10m",
+    900: "15m",
+  },
+];
+
 const hasStarted = ref(false);
 const settingsStore = useSettingsStore();
 const canDecrement = ref(true);
 const finished = ref(false);
 const open = ref(false);
+const selectedInc = ref("60");
 
 const duration = computed(() => {
   return `${settingsStore.settings.startHours || 0}h ${
@@ -208,6 +223,35 @@ watchEffect(() => {});
             </div>
             <div class="px-4 py-5 sm:p-6">
               <dt class="text-base font-normal text-gray-700">Controls</dt>
+              <!-- Increment selector -->
+              <template v-for="options in incOptions">
+                <span
+                  class="isolate inline-flex -space-x-px rounded-md shadow-sm overflow-x-scroll"
+                >
+                  <button
+                    v-for="(seconds, index) in Object.keys(options)"
+                    type="button"
+                    class="relative inline-flex items-center bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
+                    :class="{
+                      'rounded-l-md': index === 0,
+                      'rounded-r-md': index === Object.keys(options).length - 1,
+                      'ring-2 ring-inset ring-indigo-500':
+                        seconds === selectedInc,
+                      '-ml-px': index > 0,
+                    }"
+                    @click="
+                      () => {
+                        selectedInc = seconds;
+                      }
+                    "
+                  >
+                    {{
+                      //@ts-ignore;
+                      options[seconds]
+                    }}
+                  </button>
+                </span>
+              </template>
               <dd
                 class="mt-1 flex items-baseline justify-between md:block lg:flex"
               >
@@ -218,7 +262,10 @@ watchEffect(() => {});
                     <button
                       type="button"
                       class="relative inline-flex items-center rounded-l-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-                      @click="canDecrement && settingsStore.increment(-1)"
+                      @click="
+                        canDecrement &&
+                          settingsStore.increment(-1 * Number(selectedInc))
+                      "
                     >
                       <span class="sr-only">Previous</span>
                       <MinusIcon class="h-5 w-5" aria-hidden="true" />
@@ -238,7 +285,7 @@ watchEffect(() => {});
                     <button
                       type="button"
                       class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10"
-                      @click="settingsStore.increment(1)"
+                      @click="settingsStore.increment(Number(selectedInc))"
                     >
                       <PlusIcon class="h-5 w-5" aria-hidden="true" />
                     </button>

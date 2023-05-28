@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useSettingsStore } from "./Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
 import FullscreenButton from "./components/FullscreenButton.vue";
+import { getCurrent } from "@tauri-apps/api/window";
 
 const store = useSettingsStore();
 const passwordInput = ref(null);
@@ -26,6 +27,9 @@ const unlisten = listen("passwordResponse", (event) => {
     shake.value = false;
   }, 300);
 });
+const unlistenFocus = getCurrent()?.onFocusChanged((event) => {
+  emit("password-focus-changed", event.payload);
+});
 
 function nope() {
   // @ts-ignore
@@ -33,9 +37,12 @@ function nope() {
 }
 onMounted(() => {
   nope();
+  getCurrent()?.setFocus();
+  emit("password-focus-changed", true);
 });
 onUnmounted(async () => {
   (await unlisten)();
+  (await unlistenFocus)();
 });
 </script>
 <template>

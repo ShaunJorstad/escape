@@ -4,7 +4,7 @@ import { useSettingsStore } from "./Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
 import placeholder from "./components/Placeholder.vue";
 import Wallpaper from "./components/Controls/Wallpaper.vue";
-import { WebviewWindow } from "@tauri-apps/api/window";
+import { WebviewWindow, getCurrent } from "@tauri-apps/api/window";
 import PrimaryButton from "./components/Controls/PrimaryButton.vue";
 import { watch } from "fs";
 import PasswordGuess from "./components/PasswordGuess.vue";
@@ -12,6 +12,7 @@ import PasswordGuess from "./components/PasswordGuess.vue";
 const passwordInput = ref("");
 const store = useSettingsStore();
 const status = ref(false);
+const isFocused = ref(true);
 
 function emitChangeNavigation(index: number) {
   if (index >= 10) {
@@ -57,6 +58,9 @@ const unlistenPassword = listen("passwordGuess", (event: any) => {
   }
   emit("passwordResponse", { result });
 });
+const listenFocus = listen("password-focus-changed", (event: any) => {
+  isFocused.value = event.payload;
+});
 
 watchEffect(() => {
   emit("broadcast", store.dataForBroadcast);
@@ -64,6 +68,7 @@ watchEffect(() => {
 onUnmounted(async () => {
   (await unlisten)();
   (await unlistenPassword)();
+  (await listenFocus)();
 });
 </script>
 <template>
@@ -73,6 +78,18 @@ onUnmounted(async () => {
       <div class="bg-white drop-shadow-md rounded-md p-4">
         <PrimaryButton @click="openMonitor" :text="'Open Password Monitor'" />
         <PrimaryButton @click="closeMonitor" :text="'Close Password Monitor'" />
+        <button
+          v-if="!isFocused"
+          type="button"
+          class="mt-4 rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          @click="
+            () => {
+              WebviewWindow.getByLabel('guesser')?.setFocus();
+            }
+          "
+        >
+          Focus Password Window
+        </button>
       </div>
       <div class="bg-white drop-shadow-md rounded-md p-4">
         <h1>Guess history:</h1>

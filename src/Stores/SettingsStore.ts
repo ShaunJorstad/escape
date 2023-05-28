@@ -97,7 +97,7 @@ const createStore = defineStore("store", () => {
     // overflow
     if (settings.startMinutes > 59) {
       settings.startHours++;
-      settings.startMinutes -= 59;
+      settings.startMinutes -= 60;
     }
     // underflow
     if (settings.startMinutes < 0) {
