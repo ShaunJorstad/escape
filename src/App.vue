@@ -4,6 +4,8 @@ import { onMounted, onUnmounted } from "vue";
 import { useSettingsStore } from "./Stores/SettingsStore";
 import Router from "./Router";
 import { checkUpdate } from "@tauri-apps/api/updater";
+import { WebviewWindow } from "@tauri-apps/api/window";
+import { closeAllWindows } from "./WindowManager";
 
 const settingsStore = useSettingsStore();
 
@@ -24,11 +26,17 @@ const unlistenUpdates = listen("tauri://update-status", (event) => {
   console.log(event);
 });
 
+const unlistenCloseWindow = listen("tauri://close-requested", (event) => {
+  closeAllWindows();
+});
+
 onUnmounted(async () => {
   (await unlistenClose)();
   (await unlistenNavigationChange)();
   (await unlistenUpdates)();
+  (await unlistenCloseWindow)();
 });
+onMounted(() => {});
 </script>
 
 <template>
