@@ -63,31 +63,6 @@ function closeGameMonitor() {
         }"
       />
     </div>
-    <div
-      class="absolute w-full h-full flex justify-center items-center opacity-0 hover:opacity-100"
-    >
-      <PrimaryButton
-        @click="openGameMonitor"
-        :text="'Open Game Monitor'"
-        v-if="!settingsStore.monitorIsOpen"
-      />
-      <div
-        v-else
-        class="w-full h-full flex flex-col justify-around items-center"
-      >
-        <ArrowsPointingOutIcon
-          class="h-12 w-12 hover:cursor-pointer text-stone-800"
-          v-if="!expand"
-          @click="toggle"
-        />
-        <ArrowsPointingInIcon
-          v-else
-          class="h-12 w-12 hover:cursor-pointer text-stone-800"
-          @click="toggle"
-        />
-        <PrimaryButton @click="closeGameMonitor" :text="'Close Game Monitor'" />
-      </div>
-    </div>
   </div>
 </template>
 

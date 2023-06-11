@@ -2,8 +2,10 @@
 import { computed, onUnmounted, ref, watchEffect } from "vue";
 import NumberInput from "./NumberInput.vue";
 import Router from "../../Router";
+import PrimaryButton from "./PrimaryButton.vue";
 import { useSettingsStore } from "../../Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
+import { WebviewWindow } from "@tauri-apps/api/window";
 import {
   PlusIcon,
   MinusIcon,
@@ -76,6 +78,38 @@ const unlisten = listen("timeNotice", (event) => {
     settingsStore.timerIsActive = false;
   }
 });
+
+function emitChangeNavigation(index: number) {
+  if (index >= 10) {
+    return;
+  }
+  emit("change-navigation");
+  setTimeout(() => {
+    emitChangeNavigation(index + 1);
+  }, 200);
+}
+
+function openGameMonitor() {
+  const mainWindow = WebviewWindow.getByLabel("timer");
+  if (mainWindow) return;
+  const webview = new WebviewWindow("timer", {
+    url: "index.html",
+  });
+  webview.once("tauri://created", function () {
+    // webview window successfully created
+    settingsStore.monitorIsOpen = true;
+
+    emitChangeNavigation(0);
+  });
+}
+
+function closeGameMonitor() {
+  const timerWindow = WebviewWindow.getByLabel("timer");
+  if (timerWindow) {
+    timerWindow.close();
+    settingsStore.monitorIsOpen = false;
+  }
+}
 
 watchEffect(() => {
   canDecrement.value = remainingSeconds.value >= Number(selectedInc.value);
@@ -162,6 +196,17 @@ watchEffect(() => {});
       <h3 class="text-base text-xl font-semibold leading-6 text-gray-900">
         Timer
       </h3>
+      <PrimaryButton
+        @click="openGameMonitor"
+        :text="'Open Game Monitor'"
+        v-if="!settingsStore.monitorIsOpen"
+      />
+      <PrimaryButton
+        @click="closeGameMonitor"
+        :outline="true"
+        :text="'Close Game Monitor'"
+        v-else
+      />
       <template v-if="!hasStarted">
         <div class="grid grid-cols-2">
           <span>Hours:</span>
