@@ -39,6 +39,7 @@ let defaultSettings = {
   title: "",
   startHours: 0,
   startMinutes: 0,
+  startSeconds: 0,
   enableHints: false,
   hints: [],
   messages: [],
@@ -63,6 +64,29 @@ const createStore = defineStore("store", () => {
     return settings.messages?.filter((message) => message.visible);
   });
 
+  const gameDurationSeconds = computed(() => {
+    return (
+      (settings.startHours * 60 + settings.startMinutes) * 60 +
+      settings.startSeconds
+    );
+  });
+
+  // Updates the game duration
+  function setDurationSeconds(seconds: number) {
+    let remaining = seconds;
+    let h = Math.floor(remaining / 3600);
+    remaining -= h * 3600;
+
+    let m = Math.floor(remaining / 60);
+    remaining -= m * 60;
+
+    let s = remaining;
+
+    settings.startHours = h;
+    settings.startMinutes = m;
+    settings.startSeconds = s;
+  }
+
   // Getters
 
   // Actions
@@ -83,26 +107,13 @@ const createStore = defineStore("store", () => {
     timerIsActive.value = !timerIsActive.value;
   }
 
-  function increment(size: number) {
-    if (size > 59) {
-      return;
-    }
-    let totalMinutes = settings.startHours * 60 + settings.startMinutes;
-    if (size < 0 && -1 * size >= totalMinutes) {
-      settings.startHours = 0;
-      settings.startMinutes = 0;
-      return;
-    }
-    settings.startMinutes += size;
-    // overflow
-    if (settings.startMinutes > 59) {
-      settings.startHours++;
-      settings.startMinutes -= 60;
-    }
-    // underflow
-    if (settings.startMinutes < 0) {
-      settings.startHours -= 1;
-      settings.startMinutes = 59;
+  function increment(seconds: number) {
+    let durationSeconds = gameDurationSeconds.value;
+    if (seconds < 0 && -1 * seconds >= durationSeconds) {
+      // Negative time. Check bounds to prevent negative game duration
+      setDurationSeconds(0);
+    } else {
+      setDurationSeconds(durationSeconds + seconds);
     }
   }
 
@@ -202,6 +213,7 @@ const createStore = defineStore("store", () => {
     dataForBroadcast,
     consumeBroadcast,
     init,
+    gameDurationSeconds,
   };
 });
 

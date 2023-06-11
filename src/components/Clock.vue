@@ -12,6 +12,7 @@ import {
 import { useSettingsStore } from "../Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
 import { useInterval } from "@vueuse/core";
+import { storeToRefs } from "pinia";
 const settingsStore = useSettingsStore();
 const isDev = import.meta.env.DEV;
 const emittedBelow60 = ref(false);
@@ -24,16 +25,9 @@ let { counter, reset, pause, resume } = useInterval(tickMS, { controls: true });
 pause();
 reset();
 
-const totalSeconds = computed(() => {
-  let val =
-    (settingsStore.settings.startHours || 0) * 60 * 60 +
-    (settingsStore.settings.startMinutes || 0) * 60;
-  return val;
-});
-
 const remainingSeconds = computed(() => {
-  if (counter.value > totalSeconds.value) return 0;
-  return totalSeconds.value - counter.value;
+  if (counter.value > settingsStore.gameDurationSeconds) return 0;
+  return settingsStore.gameDurationSeconds - counter.value;
 });
 
 function calcRadians(total: Number) {
@@ -45,7 +39,7 @@ function calcRadians(total: Number) {
 }
 
 const radians = computed(() => {
-  return calcRadians(totalSeconds.value);
+  return calcRadians(settingsStore.gameDurationSeconds);
 });
 
 const hours = computed(() => {
@@ -119,7 +113,9 @@ watch(remainingSeconds, () => {
   }
 });
 
-watch(totalSeconds, () => {
+const { gameDurationSeconds } = storeToRefs(settingsStore);
+
+watch(gameDurationSeconds, () => {
   // When the game time changes
   renderArc("#059669", 2, 6);
   renderArc("#ffffff", radians.value, 8);
@@ -128,7 +124,7 @@ watch(totalSeconds, () => {
 });
 
 watchEffect(() => {
-  if (counter.value <= totalSeconds.value) {
+  if (counter.value <= settingsStore.gameDurationSeconds) {
     renderArc("#ffffff", radians.value, 8);
   }
   if (remainingSeconds.value <= 0) {

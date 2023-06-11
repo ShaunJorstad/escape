@@ -18,6 +18,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
+import { watch } from "fs";
 
 const incOptions = [
   {
@@ -34,6 +35,7 @@ const incOptions = [
 ];
 
 const hasStarted = ref(false);
+const remainingSeconds = ref(0);
 const settingsStore = useSettingsStore();
 const canDecrement = ref(true);
 const finished = ref(false);
@@ -43,7 +45,7 @@ const selectedInc = ref("60");
 const duration = computed(() => {
   return `${settingsStore.settings.startHours || 0}h ${
     settingsStore.settings.startMinutes || 0
-  }m`;
+  }m ${settingsStore.settings.startSeconds || 0}s`;
 });
 
 function startTimer() {
@@ -67,12 +69,16 @@ function reset() {
 const unlisten = listen("timeNotice", (event) => {
   // @ts-ignore
   const { remaining } = event.payload;
-  canDecrement.value = remaining >= 60;
+  remainingSeconds.value = remaining;
   finished.value = remaining === 0;
   if (remaining === 0) {
     open.value = true;
     settingsStore.timerIsActive = false;
   }
+});
+
+watchEffect(() => {
+  canDecrement.value = remainingSeconds.value >= Number(selectedInc.value);
 });
 
 onUnmounted(async () => {
@@ -226,7 +232,7 @@ watchEffect(() => {});
               <!-- Increment selector -->
               <template v-for="options in incOptions">
                 <span
-                  class="isolate inline-flex -space-x-px rounded-md shadow-sm overflow-x-scroll"
+                  class="isolate inline-flex -space-x-px rounded-md shadow-sm"
                 >
                   <button
                     v-for="(seconds, index) in Object.keys(options)"
