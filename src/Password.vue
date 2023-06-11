@@ -8,6 +8,7 @@ import { WebviewWindow, getCurrent } from "@tauri-apps/api/window";
 import PrimaryButton from "./components/Controls/PrimaryButton.vue";
 import { watch } from "fs";
 import PasswordGuess from "./components/PasswordGuess.vue";
+import { BlockKeys } from "./Shortcuts";
 
 const passwordInput = ref("");
 const store = useSettingsStore();
@@ -61,6 +62,8 @@ const unlistenPassword = listen("passwordGuess", (event: any) => {
 const listenFocus = listen("password-focus-changed", (event: any) => {
   isFocused.value = event.payload;
 });
+
+BlockKeys();
 
 watchEffect(() => {
   emit("broadcast", store.dataForBroadcast);
