@@ -4,6 +4,7 @@ import { useSettingsStore } from "./Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
 import FullscreenButton from "./components/FullscreenButton.vue";
 import { getCurrent } from "@tauri-apps/api/window";
+import { BlockKeys } from "./Shortcuts";
 
 const store = useSettingsStore();
 const passwordInput = ref(null);
@@ -35,6 +36,7 @@ function nope() {
   // @ts-ignore
   passwordInput?.value.focus();
 }
+BlockKeys();
 onMounted(() => {
   nope();
   getCurrent()?.setFocus();

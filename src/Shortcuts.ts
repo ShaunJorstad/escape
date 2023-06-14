@@ -42,6 +42,7 @@ const blockedShortcuts = [
   "BrowserForward",
   "BrowserHome",
   "BrowserRefresh",
+  "Tab",
 ];
 
 export async function BlockKeys() {
