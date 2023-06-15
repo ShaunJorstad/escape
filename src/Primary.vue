@@ -21,6 +21,7 @@ watchEffect(() => {
 });
 
 onMounted(() => {
+  settingsStore.settings.startSeconds = 0;
   settingsStore.monitorView = "timer";
 });
 
@@ -30,6 +31,7 @@ onUnmounted(async () => {
 </script>
 <template>
   <Route>
+    <RouterLink to="/">home</RouterLink>
     <SavedMessages />
     <div class="grid grid-cols-2 gap-4 w-full h-full">
       <div class="">

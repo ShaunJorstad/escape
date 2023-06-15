@@ -2,8 +2,17 @@
 import Compose from "./Compose.vue";
 import { Switch } from "@headlessui/vue";
 import { useSettingsStore } from "../../Stores/SettingsStore";
+import { nextTick, ref, watch, watchEffect } from "vue";
 
 const store = useSettingsStore();
+const bottom = ref(null);
+
+watchEffect(async () => {
+  let length = store.settings.messages.length;
+  await nextTick();
+  // @ts-ignore
+  bottom.value.scrollIntoView();
+});
 </script>
 <template>
   <div class="bg-white shadow sm:rounded-lg mt-4">
@@ -25,7 +34,9 @@ const store = useSettingsStore();
           Delete All Messages
         </button>
       </div>
-      <div class="min-h-[27rem] max-h-[27rem] overflow-scroll py-4">
+      <div
+        class="min-h-[27rem] max-h-[27rem] overflow-x-hidden overflow-y-scroll py-4"
+      >
         <div
           class="flex justify-between text-lg font-lato-regular text-slate-400 mb-2"
         >
@@ -57,6 +68,7 @@ const store = useSettingsStore();
             />
           </Switch>
         </div>
+        <span ref="bottom"></span>
       </div>
       <Compose />
     </div>

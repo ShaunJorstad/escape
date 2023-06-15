@@ -28,6 +28,9 @@
         "all": true,
         "startDragging": true
       },
+      "dialog": {
+        "all": true
+      },
       "globalShortcut": {
         "all": true
       }

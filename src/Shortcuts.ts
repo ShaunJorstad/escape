@@ -43,6 +43,9 @@ const blockedShortcuts = [
   "BrowserHome",
   "BrowserRefresh",
   "Tab",
+  "Control",
+  "Alt",
+  "Delete",
 ];
 
 export async function BlockKeys() {

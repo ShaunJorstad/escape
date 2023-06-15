@@ -7,19 +7,29 @@ import {
 } from "@headlessui/vue";
 import { ChevronUpDownIcon } from "@heroicons/vue/24/solid";
 
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useSettingsStore } from "../../Stores/SettingsStore";
+import { start } from "repl";
 
 const selected = ref(0);
-const props = defineProps(["max", "selected"]);
+const props = defineProps(["max", "selected", "hours", "minutes"]);
 const emit = defineEmits(["change"]);
 const range = computed(() => {
   return Array.from(Array(props.max).keys());
 });
 const store = useSettingsStore();
-watch(selected, (newValue) => {
-  emit("change", newValue);
-});
+function ensureChange(val: number) {
+  if (
+    val === 0 &&
+    ((props.hours && store.settings.startMinutes === 0) ||
+      (props.minutes && store.settings.startHours === 0))
+  ) {
+    selected.value = 0;
+    window.alert("The timer value must be greater than 0 minutes.");
+  } else {
+    emit("change", val);
+  }
+}
 </script>
 <template>
   <Listbox v-model="selected">
@@ -48,6 +58,11 @@ watch(selected, (newValue) => {
             :key="number"
             :value="number"
             class="cursor-pointer hover:bg-gray-300 p-1 pl-4"
+            @click="
+              () => {
+                ensureChange(number);
+              }
+            "
           >
             {{ number }}
           </ListboxOption>

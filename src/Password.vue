@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref, watchEffect } from "vue";
+import { nextTick, onUnmounted, ref, watchEffect } from "vue";
 import { useSettingsStore } from "./Stores/SettingsStore";
 import { emit, listen } from "@tauri-apps/api/event";
 import placeholder from "./components/Placeholder.vue";
@@ -65,6 +65,13 @@ const listenFocus = listen("password-focus-changed", (event: any) => {
 
 BlockKeys();
 
+watchEffect(async () => {
+  let length = store.settings.guesses;
+  await nextTick();
+  // @ts-ignore
+  bottom.value.scrollIntoView();
+});
+
 watchEffect(() => {
   emit("broadcast", store.dataForBroadcast);
 });
@@ -102,6 +109,7 @@ onUnmounted(async () => {
             :guess="guess"
             :index="index"
           />
+          <span ref="bottom"></span>
         </div>
         <PrimaryButton
           text="Clear history"

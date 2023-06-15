@@ -125,6 +125,9 @@ const createStore = defineStore("store", () => {
   }
 
   const dataForBroadcast = computed(() => {
+    if (settings.openSavedMessages) {
+      return;
+    }
     let data = {
       settings: JSON.parse(JSON.stringify(settings)),
     };
@@ -162,11 +165,22 @@ const createStore = defineStore("store", () => {
   }
 
   function message(text: string) {
+    if (text.trim() === "") {
+      window.alert("You cannot send an empty message.");
+      return;
+    }
+    let lastIndex = settings.messages.length;
     // @ts-ignore
     settings.messages.push({
       text,
       visible: true,
     });
+    settings.openSavedMessages = false;
+    if (lastIndex != 0) {
+      // @ts-ignore
+      settings.messages[lastIndex - 1].visible = false;
+    }
+
     var audio = new Audio("/message-tone.wav");
     audio.play();
   }
@@ -191,6 +205,10 @@ const createStore = defineStore("store", () => {
     settings.guesses.push(text);
     // @ts-ignore
     let result = text === settings.password;
+    if (!result) {
+      var audio = new Audio("/error.wav");
+      audio.play();
+    }
     return result;
   }
 
