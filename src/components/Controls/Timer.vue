@@ -21,6 +21,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { watch } from "fs";
+import FullscreenButton from "../FullscreenButton.vue";
 
 const incOptions = [
   {
@@ -211,6 +212,7 @@ watchEffect(() => {});
         :text="'Close Game Monitor'"
         v-else
       />
+      <FullscreenButton :windowLabel="'timer'" />
       <template v-if="!hasStarted">
         <div class="grid grid-cols-2">
           <span>Hours:</span>

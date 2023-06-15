@@ -49,7 +49,6 @@ onUnmounted(async () => {
 </script>
 <template>
   <div class="h-screen -mt-8">
-    <FullscreenButton />
     <img
       class="absolute w-screen h-screen z-10 select-none"
       :src="

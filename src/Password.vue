@@ -9,6 +9,7 @@ import PrimaryButton from "./components/Controls/PrimaryButton.vue";
 import { watch } from "fs";
 import PasswordGuess from "./components/PasswordGuess.vue";
 import { BlockKeys } from "./Shortcuts";
+import FullscreenButton from "./components/FullscreenButton.vue";
 
 const passwordInput = ref("");
 const store = useSettingsStore();
@@ -88,6 +89,7 @@ onUnmounted(async () => {
       <div class="bg-white drop-shadow-md rounded-md p-4">
         <PrimaryButton @click="openMonitor" :text="'Open Password Monitor'" />
         <PrimaryButton @click="closeMonitor" :text="'Close Password Monitor'" />
+        <FullscreenButton :windowLabel="'guesser'" />
         <button
           v-if="!isFocused"
           type="button"

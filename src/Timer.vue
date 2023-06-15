@@ -32,7 +32,6 @@ onUnmounted(async () => {
 </script>
 <template>
   <div class="h-full w-full overflow-hidden">
-    <FullscreenButton v-if="!isPrimary" />
     <h1 class="font-lato-bold text-stone-600 text-2xl text-center mt-8">
       {{ settingsStore.settings.title }}
     </h1>
