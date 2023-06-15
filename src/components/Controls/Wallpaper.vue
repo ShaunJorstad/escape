@@ -23,12 +23,12 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="grid grid-cols-2">
+  <div class="grid grid-cols-2 m-1">
     <div>
       <h1>{{ props.label }}</h1>
       <input
         type="file"
-        class="rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        class="rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 w-52"
         accept="image/jpg"
         @change="processFile"
       />
