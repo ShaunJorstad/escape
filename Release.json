@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.0",
   "notes": "Semi stable beta. Includes timer, messages, hints, password guessing.",
   "pub_date": "2023-05-25T13:52:21.347Z",
   "platforms": {
